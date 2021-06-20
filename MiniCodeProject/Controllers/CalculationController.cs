@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -28,6 +24,10 @@ namespace MiniCodeProject.Controllers
             _logger.LogInformation("Request received! Function: CombinedWith");
             _logger.LogInformation($"Input Parameters: { inputA }, { inputB }");
 
+            // in a larger application we'd send a request off to the service layer to do what it needs to do
+            // in an async solution we'd return the requestId to the ui to confirm it was recieved and later dispatch a SignalR message with the result
+            // this requirement is very simple though, no point - KISS
+            
             decimal result = inputA * inputB;
 
             _logger.LogInformation($"Calculated result: {result}");

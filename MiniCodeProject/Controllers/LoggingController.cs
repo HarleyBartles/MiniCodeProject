@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MiniCodeProject.Controllers
 {
@@ -29,8 +25,13 @@ namespace MiniCodeProject.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            _logger.Log(request.LogLevel, request.Message);
+            // The log level gets lost between winston in the ui and here
+            // For now, just gonna log all ui logs as info
+            // ToDo: technical debt, figure this out and fix it or better still use a ui logger more appropriate for the task such as Elmah
 
+            //_logger.Log((LogLevel)request.LogLevel, request.Message);
+            _logger.LogInformation($"UI LOG: {request.Message}");
+            
             return new OkResult();
         }
     }

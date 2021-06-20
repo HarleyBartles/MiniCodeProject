@@ -1,12 +1,12 @@
 ﻿
-// ToDo: extend for external api requests
+// ToDo: extend for external api requests as required
 export const localGetRequest = (url = '', data = {}) => {
     const params = new URLSearchParams(data).toString();
+    const path = url + '?' + params
 
-    return fetch(url + '?' + params, {
+    return fetch(path, {
         method: 'GET',
         headers: {
-            //'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
     })

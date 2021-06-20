@@ -23,16 +23,20 @@ const Calculator = () => {
         return errors
     }
 
-    const submit = ({ setSubmitting }) => {
-        localGetRequest(`/api/calculation/${selectedOption === 0 ? 'combined-with' : 'either'}`, { inputA, inputB } )
+    const submit = (values, actions) => {
+        let path = '/api/calculation/'
+        path += selectedOption === 0 ? 'combined-with' : 'either'
+
+        localGetRequest(path, { inputA, inputB } )
             .then(data => {
+                logger.info(`Info: Response from server received. Result: ${data}`)
                 setResult(data)
             })
             .catch(ex => {
-                logger.error(ex.message)
+                logger.error(`Error: ${ex.message}`)
             })
             .finally(
-                setSubmitting(false)
+                actions.setSubmitting(false)
             )
     }
 

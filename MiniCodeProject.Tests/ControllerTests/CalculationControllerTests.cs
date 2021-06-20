@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using MiniCodeProject.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace MiniCodeProject.Tests.ControllerTests
@@ -42,8 +37,8 @@ namespace MiniCodeProject.Tests.ControllerTests
             var response = controller.CalculateCombinedWithResult(inputA, inputB);
 
             // Assert
-            Assert.IsType<OkObjectResult>(response.Result);
-            Assert.Equal(expectedResult, (response.Result as OkObjectResult).Value);
+            OkObjectResult result =  Assert.IsType<OkObjectResult>(response.Result);
+            Assert.Equal(expectedResult, result.Value);
         }
 
 
@@ -62,6 +57,7 @@ namespace MiniCodeProject.Tests.ControllerTests
             // Assert
             Assert.IsType<BadRequestResult>(response.Result);
         }
+
         [Theory]
         [InlineData(0.5, 0.5, 0.75)]
         [InlineData(0.25, 0.25, 0.4375)]
@@ -76,8 +72,8 @@ namespace MiniCodeProject.Tests.ControllerTests
             var response = controller.CalculateEitherResult(inputA, inputB);
 
             // Assert
-            Assert.IsType<OkObjectResult>(response.Result);
-            Assert.Equal(expectedResult, (response.Result as OkObjectResult).Value);
+            OkObjectResult result = Assert.IsType<OkObjectResult>(response.Result);
+            Assert.Equal(expectedResult, result.Value);
         }
     }
 }

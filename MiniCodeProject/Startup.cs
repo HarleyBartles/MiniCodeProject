@@ -48,6 +48,10 @@ namespace MiniCodeProject
                 app.UseHsts();
             }
 
+            // windows update KB5003637 causes issues with SSL in chunked files as of 17th June 2021
+            // if you're getting a net::ERR_HTTP2_PROTOCOL_ERROR message, disable HTTPS redirection in project properties -> debugging (and here)
+            // or uninstall the dodgy update pack (although windows will want to reinstall it again next time you restart)
+            // see https://docs.microsoft.com/en-us/answers/questions/440339/kb5003637-and-the-new-kb5004476-gives-error-34fail.html
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
